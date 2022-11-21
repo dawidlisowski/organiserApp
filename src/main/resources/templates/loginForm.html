@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<style>
+.header{
+	position: absolute;
+	top: calc(50% - 35px);
+	left: calc(50% - 350px);
+	z-index: 2;
+}
+
+.header div{
+	float: left;
+	color: #000;
+	font-size: 40px;
+	font-weight: 250;
+}
+
+.header div span{
+	color: #5379fa !important;
+}
+.login{
+	position: absolute;
+	top: calc(50% - 80px);
+	left: calc(50% - 50px);
+	height: 150px;
+	width: 350px;
+	padding: 10px;
+	z-index: 2;
+	font-size: 5px;
+}
+
+.login input[type=text]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(0,0,0,0.6);
+	border-radius: 2px;
+	color: #a18d6c;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+.login input[type=password]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(0,0,0,0.6);
+	border-radius: 2px;
+	color: #a18d6c;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+.login input[type=submit]{
+	width: 260px;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #000;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #a18d6c;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+}
+
+.login input[type=submit]:hover{
+	opacity: 0.8;
+}
+
+.login input[type=submit]:active{
+	opacity: 0.6;
+}
+
+.login input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(0,0,0,0.9);
+}
+
+.login input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(0,0,0,0.9);
+}
+
+.login input[type=submit]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(0,0,0,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(0,0,0,0.6);
+}
+</style>
+<body>
+<div class="header">
+    <div>Organiser<span>App</span></div>
+</div>
+    <div class="login">
+        <h1 th:text="${loginInfo}"></h1>
+
+        <form action="/user/login" method="post" th:object="${loginForm}">
+            <input type="text" th:field="*{login}" placeholder="login"><br/>
+            <input type="password" th:field="*{password}" placeholder="password"><br/>
+            <input type="submit" value="Login">
+        </form>
+        <h1>New in?<span> </span><a href="/user/register">Register now!</a></h1>
+    </div>
+
+</body>
+</html>

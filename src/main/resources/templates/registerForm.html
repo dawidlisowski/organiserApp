@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<style>
+.header{
+	position: absolute;
+	top: calc(50% - 35px);
+	left: calc(50% - 350px);
+	z-index: 2;
+}
+
+.header div{
+	float: left;
+	color: #000;
+	font-size: 40px;
+	font-weight: 250;
+}
+
+.header div span{
+	color: #5379fa !important;
+}
+.login{
+	position: absolute;
+	top: calc(50% - 150px);
+	left: calc(50% - 50px);
+	height: 150px;
+	width: 350px;
+	padding: 10px;
+	z-index: 2;
+	font-size: 5px;
+}
+
+.login input[type=text]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(0,0,0,0.6);
+	border-radius: 2px;
+	color: #a18d6c;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+.login input[type=password]{
+	width: 250px;
+	height: 30px;
+	background: transparent;
+	border: 1px solid rgba(0,0,0,0.6);
+	border-radius: 2px;
+	color: #a18d6c;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 4px;
+	margin-top: 10px;
+}
+
+.login input[type=submit]{
+	width: 260px;
+	height: 35px;
+	background: #fff;
+	border: 1px solid #000;
+	cursor: pointer;
+	border-radius: 2px;
+	color: #a18d6c;
+	font-size: 16px;
+	font-weight: 400;
+	padding: 6px;
+	margin-top: 10px;
+}
+
+.login input[type=submit]:hover{
+	opacity: 0.8;
+}
+
+.login input[type=submit]:active{
+	opacity: 0.6;
+}
+
+.login input[type=text]:focus{
+	outline: none;
+	border: 1px solid rgba(0,0,0,0.9);
+}
+
+.login input[type=password]:focus{
+	outline: none;
+	border: 1px solid rgba(0,0,0,0.9);
+}
+
+.login input[type=submit]:focus{
+	outline: none;
+}
+
+::-webkit-input-placeholder{
+   color: rgba(0,0,0,0.6);
+}
+
+::-moz-input-placeholder{
+   color: rgba(0,0,0,0.6);
+}
+</style>
+<body>
+<div class="header">
+    <div>New<span>Account</span></div>
+</div>
+    <div class="login">
+        <h1 th:text="${registerInfo}"></h1>
+        <form action="/user/register" method="post" th:object="${registerForm}">
+            <p th:if="${#fields.hasErrors('login')}" th:errors="*{login}"></p>
+            <input type="text" th:field="*{login}" placeholder="login"><br/>
+
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+            <input type="password" th:field="*{password}" placeholder="password"><br/>
+
+            <p th:if="${#fields.hasErrors('passwordRepeat')}" th:errors="*{passwordRepeat}"></p>
+            <input type="password" th:field="*{passwordRepeat}" placeholder="repeat password"><br/>
+
+            <p th:if="${#fields.hasErrors('city')}" th:errors="*{city}"></p>
+            <input type="text" th:field="*{city}" placeholder="city"><br/>
+
+            <p th:if="${#fields.hasErrors('postalCode')}" th:errors="*{postalCode}"></p>
+            <input type="text" th:field="*{postalCode}" placeholder="postal Code"><br/>
+
+            <input type="submit" value="Create account">
+        </form>
+    </div>
+</body>
+</html>

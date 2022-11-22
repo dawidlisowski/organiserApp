@@ -2,48 +2,38 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Main paage</title>
+    <title>Title</title>
 </head>
 <style>
 .header{
-position: absolute;
-top: calc(50% - 220px);
-left: calc(50% - 500px);
-z-index: 2;
+	position: absolute;
+	top: calc(50% - 80px);
+	left: calc(50% - 250px);
+	z-index: 2;
 }
 
 .header div{
-float: left;
-color: #000;
-font-size: 50px;
-font-weight: 250;
+	float: left;
+	color: #000;
+	font-size: 40px;
+	font-weight: 250;
 }
 
 .header div span{
-color: #5379fa !important;
+	color: #5379fa !important;
 }
 
 .login{
 	position: absolute;
 	top: calc(50% - 150px);
-	left: calc(50% - 450px);
+	left: calc(50% - 50px);
 	height: 150px;
 	width: 350px;
 	padding: 10px;
 	z-index: 2;
-	font-size: 15px;
+	font-size: 5px;
 }
 
-.noteOne ul{
-	position: absolute;
-	top: calc(50% - 150px);
-	right: calc(50% - 300px);
-	height: 150px;
-	width: 500px;
-	padding: 10px;
-	z-index: 2;
-	font-size: 15px;
-}
 
 .login input[type=text]{
 	width: 400px;
@@ -69,6 +59,7 @@ color: #5379fa !important;
 	padding: 4px;
 	margin-top: 10px;
 }
+
 
 .login input[type=password]{
 	width: 250px;
@@ -98,9 +89,9 @@ color: #5379fa !important;
 }
 
 .login button[type=button] {
-    width: 150px;
+width: 150px;
 	height: 35px;
-	background: transparent;
+	background: #000;
 	border: 1px solid #000;
 	cursor: pointer;
 	border-radius: 2px;
@@ -112,10 +103,6 @@ color: #5379fa !important;
 }
 
 .login input[type=submit]:hover{
-	opacity: 0.8;
-}
-
-.note button[type=button]:hover{
 	opacity: 0.8;
 }
 
@@ -143,28 +130,21 @@ color: #5379fa !important;
 
 ::-moz-input-placeholder{
    color: rgba(0,0,0,0.6);
-}
 </style>
 <body>
     <div class="header">
-        <div>Welcome <span th:text="${login}"></span></div>
+      <div>New<span>Note</span></div>
     </div>
-    <div class="header" style="top: 40%; left: 18%">
-        <div th:text="${city}"></div><br/>
-        <div style="color: #5379fa" th:text="${'    ' + weather + '°C'}"></div><br/>
-        <div style="font-size: 20px;" th:text="${'cloud level: ' + clouds + '%'}"></div><br/>
-        <div style="font-size: 20px;" th:text="${date}"></div>
+    <div class="login" style="top: 73%; left: 49%">
+      <button onclick="location.href='/'" type="button">Back to notes</button>
     </div>
     <div class="login">
-        <button onclick="location.href='/note/add'" type="button">Create new note</button>
-    </div>
-    <div class="noteOne">
-        <ul>
-            <li th:each="note : ${notes}">
-                <strong th:text="${note.getTitle()}"></strong><br/>
-                <span th:text="${note.getText()}" ></span>
-            </li>
-        </ul>
+      <form action="/note/add" method="post" th:object="${noteForm}">
+        <input type="text" th:field="*{title}" placeholder="Title">
+        <div class ="text"><input type="text" style="display:inline" th:field="*{text}" placeholder="Text"></div>
+        <input type="text" th:field="*{noteDate}" placeholder="Date yyyy-MM-dd">
+        <input type="submit" value="Create">
+      </form>
     </div>
 </body>
 </html>

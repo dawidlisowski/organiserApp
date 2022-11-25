@@ -2,9 +2,11 @@ package pl.dawidlisowski.OrganiserApp.models.repositories;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import pl.dawidlisowski.OrganiserApp.models.entities.UserEntity;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository

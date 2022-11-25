@@ -26,11 +26,7 @@ public class NoteService {
     }
 
     public void addNote(NoteForm noteForm) {
-        NoteEntity newNote = new NoteEntity();
-        newNote.setNoteDate(convertStringToLocalDate(noteForm.getNoteDate()));
-        newNote.setTitle(noteForm.getTitle());
-        newNote.setText(noteForm.getText());
-        newNote.setUser(userSession.getUserEntity());
+        NoteEntity newNote = new NoteEntity(noteForm, userSession, convertStringToLocalDate(noteForm.getNoteDate()));
 
         noteRepository.save(newNote);
     }

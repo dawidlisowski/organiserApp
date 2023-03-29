@@ -14,10 +14,12 @@ import java.util.Optional;
 public class ApiService {
 
     final UserRepository userRepository;
+    final PasswordHashingService passwordHashingService;
 
     @Autowired
-    public ApiService(UserRepository userRepository) {
+    public ApiService(UserRepository userRepository, PasswordHashingService passwordHashingService) {
         this.userRepository = userRepository;
+        this.passwordHashingService = passwordHashingService;
     }
 
     public ResponseEntity getUserById(int id) {
@@ -38,8 +40,20 @@ public class ApiService {
     }
 
     public ResponseEntity saveUser(RegisterForm user) {
-        //todo check if login is free
+        if (checkIfLoginExists(user)) {
+            return ResponseEntity.status(HttpStatus.OK).body("Login taken");
+        }
+
+        hashUserPassword(user);
         userRepository.save(new UserEntity(user));
         return ResponseEntity.ok().build();
+    }
+
+    private void hashUserPassword(RegisterForm user) {
+        user.setPassword(passwordHashingService.hash(user.getPassword()));
+    }
+
+    public boolean checkIfLoginExists(RegisterForm user) {
+        return userRepository.existsByLogin(user.getLogin());
     }
 }
